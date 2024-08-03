@@ -11133,7 +11133,7 @@ p {
 
 .service-card {
   position: relative;
-  min-height: 230px;
+  min-height: 330px;
   border: 1px solid #dee2e6;
   overflow: hidden;
   border-radius: 3px;
@@ -11149,6 +11149,11 @@ p {
   margin-bottom: 25px;
   -webkit-transition: all, 0.3s;
   transition: all, 0.3s;
+}
+
+#uscLogo {
+  height: 50px;
+  width: 50px;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -11177,6 +11182,13 @@ p {
 .service-card:hover .body img.icon {
   margin-top: 5px;
   width: 45px;
+  margin-bottom: 15px;
+}
+
+.service-card:hover .body #uscLogo {
+  margin-top: 5px;
+  width: 35px;
+  height: 35px;
   margin-bottom: 15px;
 }
 
