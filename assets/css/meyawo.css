@@ -11200,9 +11200,12 @@ p {
 
 /*/ portfolio wrapper */
 .portfolio-card {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   position: relative;
   overflow: hidden;
+
 }
 
 .portfolio-card .portfolio-card-img {
@@ -12247,4 +12250,24 @@ pre .code {
 
 .section-lg {
   padding: 100px 0 !important;
+}
+
+.skill-logo, .framework-logo, .devopsTool-logo {
+  height: 30px;
+  width: 30px;
+  margin-right: 10px;
+}
+
+.skill, .framework, .devopsTool {
+  display: flex;
+  align-items: center;
+}
+
+.designation {
+  white-space: nowrap;
+}
+
+.position {
+  margin-top: -15px;
+  margin-bottom: 15px;
 }
