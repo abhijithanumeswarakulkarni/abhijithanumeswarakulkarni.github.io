@@ -18,6 +18,7 @@ import Toolbar from '@mui/material/Toolbar';
 
 const drawerWidth = 240;
 // Add contact section later -> ['Contact', 'contact']
+// Dummy Change
 const navItems = [['Home', 'home'], ['Education', 'education'], ['Skills', 'skills'], ['Experience', 'experience'], ['Projects', 'projects']];
 
 function Navigation({parentToChild, modeChange}: any) {
