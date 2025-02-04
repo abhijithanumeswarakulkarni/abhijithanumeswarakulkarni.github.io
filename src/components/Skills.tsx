@@ -66,7 +66,7 @@ function Skills() {
             <h1>Skills</h1>
             <div className="skills-grid">
                 <div className="skill">
-                    <h3>Programming Languages</h3>
+                    <h3 style={{whiteSpace: 'nowrap'}}>Programming Languages</h3>
                     <div className="flex-chips">
                         {labelsFirst.map((labelData, index) => (
                             <>
@@ -77,7 +77,7 @@ function Skills() {
                 </div>
 
                 <div className="skill">
-                    <h3>Frameworks and Libraries</h3>
+                    <h3 style={{whiteSpace: 'nowrap'}}>Frameworks and Libraries</h3>
                     <div className="flex-chips">
                         {labelsSecond.map((labelData, index) => (
                             <>
@@ -88,7 +88,7 @@ function Skills() {
                 </div>
 
                 <div className="skill">
-                    <h3>Devops and CI / CD Tools</h3>
+                    <h3 style={{whiteSpace: 'nowrap'}}>Devops and CI / CD Tools</h3>
                     <div className="flex-chips">
                         {labelsThird.map((labelData, index) => (
                             <>
@@ -99,7 +99,7 @@ function Skills() {
                 </div>
 
                 <div className="skill">
-                    <h3>Certifications and Licenses</h3>
+                    <h3 style={{whiteSpace: 'nowrap'}}>Certifications and Licenses</h3>
                     <div className="flex-chips">
                         {labnelsFourth.map((labelData, index) => (
                             <>
