@@ -1,6 +1,5 @@
 import React from "react";
 import '@fortawesome/free-regular-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Chip from '@mui/material/Chip';
 import '../assets/styles/Expertise.scss';
 import HTMLLogo from '../assets/images/html.png';
@@ -70,7 +69,7 @@ function Skills() {
                     <div className="flex-chips">
                         {labelsFirst.map((labelData, index) => (
                             <>
-                                <Chip key={index} className='chip' label={labelData.label} icon={<img src={labelData.icon} style={{width: "20px"}} />}/>
+                                <Chip key={index} className='chip' label={labelData.label} icon={<img alt="skill-logo" src={labelData.icon} style={{width: "20px"}} />}/>
                             </>
                         ))}
                     </div>
@@ -81,7 +80,7 @@ function Skills() {
                     <div className="flex-chips">
                         {labelsSecond.map((labelData, index) => (
                             <>
-                                {labelData.icon && <Chip key={index} className='chip' label={labelData.label} icon={<img src={labelData.icon} style={{width: "20px"}} />} />}
+                                {labelData.icon && <Chip key={index} className='chip' label={labelData.label} icon={<img alt="skill-logo" src={labelData.icon} style={{width: "20px"}} />} />}
                             </>
                         ))}
                     </div>
@@ -92,7 +91,7 @@ function Skills() {
                     <div className="flex-chips">
                         {labelsThird.map((labelData, index) => (
                             <>
-                            <Chip key={index} className='chip' label={labelData.label}  icon={<img src={labelData.icon} style={{width: "20px"}} />}/>
+                            <Chip key={index} className='chip' label={labelData.label}  icon={<img alt="skill-logo" src={labelData.icon} style={{width: "20px"}} />}/>
                         </>
                         ))}
                     </div>
@@ -103,7 +102,7 @@ function Skills() {
                     <div className="flex-chips">
                         {labnelsFourth.map((labelData, index) => (
                             <>
-                            <Chip key={index} className='chip' label={labelData.label}  icon={<img src={labelData.icon} style={{width: "12px"}} />}/>
+                            <Chip key={index} className='chip' label={labelData.label}  icon={<img alt="skill-logo" src={labelData.icon} style={{width: "12px"}} />}/>
                         </>
                         ))}
                     </div>

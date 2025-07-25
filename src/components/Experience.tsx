@@ -6,7 +6,6 @@ import { VerticalTimeline, VerticalTimelineElement }  from 'react-vertical-timel
 import 'react-vertical-timeline-component/style.min.css';
 import '../assets/styles/Timeline.scss'
 import MSLogo from '../assets/images/morgan.png';
-import AccoliteLogo from '../assets/images/accolite.jpeg';
 import JuspayLogo from '../assets/images/juspay.jpeg';
 
 function Experience() {
