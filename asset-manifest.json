@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/static/css/main.f1645836.css",
+    "main.js": "/static/js/main.d6d5d1f0.js",
+    "static/js/453.b05d8aa5.chunk.js": "/static/js/453.b05d8aa5.chunk.js",
+    "static/media/bg-light.png": "/static/media/bg-light.bac0efb485244a522981.png",
+    "static/media/bg-dark.png": "/static/media/bg-dark.f420c6b8458af72de935.png",
+    "static/media/profile.png": "/static/media/profile.24169cca0bd3bf70564a.png",
+    "static/media/stocksearch.png": "/static/media/stocksearch.25d88a186345c0e5f843.png",
+    "static/media/resume.pdf": "/static/media/resume.0215a0699a10cf0c9f64.pdf",
+    "static/media/SRLogo.png": "/static/media/SRLogo.2d8ab45cfa72770adda6.png",
+    "static/media/css.png": "/static/media/css.c083b18f4c5eb3e149ce.png",
+    "static/media/javascript.png": "/static/media/javascript.9598abb85ec7b5871bae.png",
+    "static/media/python.png": "/static/media/python.b53f22978b6939aacc4b.png",
+    "static/media/cpp.png": "/static/media/cpp.24a8f93854ab092f17a7.png",
+    "static/media/java.png": "/static/media/java.f5dd86c3ef6ef3f85acf.png",
+    "static/media/bms-logo.jpeg": "/static/media/bms-logo.2f795ad8577074400f8d.jpeg",
+    "static/media/typescript.png": "/static/media/typescript.1be3d7193c8f837b167d.png",
+    "index.html": "/index.html",
+    "main.f1645836.css.map": "/static/css/main.f1645836.css.map",
+    "main.d6d5d1f0.js.map": "/static/js/main.d6d5d1f0.js.map",
+    "453.b05d8aa5.chunk.js.map": "/static/js/453.b05d8aa5.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f1645836.css",
+    "static/js/main.d6d5d1f0.js"
+  ]
+}
