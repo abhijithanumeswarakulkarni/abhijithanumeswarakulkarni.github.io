@@ -3,7 +3,6 @@ import {
   Main,
   Experience,
   Skills,
-  Project,
   Navigation,
   Footer,
   Education,
