@@ -9,7 +9,7 @@ interface ProjectCardProps {
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
   return (
-    <div className="bg-secondary h-full flex flex-col rounded-lg overflow-hidden shadow-lg shadow-black/30 transform transition-all duration-300 hover:shadow-accent/20 hover:-translate-y-2" style={{ height: '420px' }}>
+    <div className="bg-secondary h-full flex flex-col rounded-lg overflow-hidden shadow-lg shadow-black/30 transform transition-all duration-300 hover:shadow-accent/20 hover:-translate-y-2">
       <div className="relative overflow-hidden">
         <img src={project.imageUrl} alt={project.title} className="w-full h-56 object-cover transition-transform duration-500 hover:scale-110" />
       </div>

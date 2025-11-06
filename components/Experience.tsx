@@ -59,7 +59,7 @@ const workExperience: ExperienceItemProps[] = [
 
 const DetailsCard: React.FC<{ job: ExperienceItemProps }> = ({ job }) => (
     <div
-        className="w-full bg-secondary rounded-lg shadow-2xl shadow-black/30 p-8 h-[280px] md:h-[400px] flex flex-col animate-content-fade-in"
+        className="w-full bg-secondary rounded-lg shadow-2xl shadow-black/30 p-8 h-[600px] md:h-[500px] flex flex-col animate-content-fade-in"
     >
         <div className="flex-shrink-0 mb-4">
             <h3 className="text-xl sm:text-2xl font-bold text-text-primary">{job.role}</h3>

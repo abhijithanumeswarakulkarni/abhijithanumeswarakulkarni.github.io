@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from 'react';
 import { GoogleGenAI } from '@google/genai';
 import ThinkingAnimation from './ThinkingAnimation';
 import Robot from './Robot';
-import dotenv from 'dotenv';
 
 interface Message {
   sender: 'user' | 'ai';
@@ -66,6 +65,7 @@ const portfolioContext = `
 const systemInstruction = `You are a helpful and friendly AI assistant for Abhijit Hanumeswara Kulkarni's portfolio. Your goal is to answer questions about Abhijit based ONLY on the context provided. Be conversational and professional. If a question is outside the scope of the provided context, politely state that you can only answer questions about Abhijit's professional experience, skills, and projects. Do not invent information. Keep answers concise. The context is: ${portfolioContext}`;
 
 // FIX: Initialize the GoogleGenAI client once at the module level to avoid creating a new instance on every request.
+// const ai = new GoogleGenAI({ apiKey: process.env.API_KEY as string });
 const ai = new GoogleGenAI({ apiKey: "AIzaSyBQtndQih3xePNooUsV57CVVF4aCHL_1Wc" });
 
 const AIMode: React.FC = () => {

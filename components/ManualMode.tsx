@@ -1,4 +1,5 @@
 import React from 'react';
+import InteractiveBackground from './InteractiveBackground';
 
 interface ManualModeProps {
   sections: { id: string, Comp: React.FC, name: string }[];
@@ -9,6 +10,14 @@ interface ManualModeProps {
 const ManualMode: React.FC<ManualModeProps> = ({ sections, activeIndex, sectionRefs }) => {
   return (
     <div className="w-full h-full relative">
+      {/* The interactive background now lives here, to cover the full screen on the hero section */}
+      <div 
+        className={`absolute inset-0 w-full h-full transition-opacity duration-700 ${activeIndex === 0 ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+        aria-hidden="true"
+      >
+        <InteractiveBackground />
+      </div>
+
       {sections.map(({ id, Comp }, index) => {
         const offset = index - activeIndex;
         const zIndex = sections.length - Math.abs(offset);

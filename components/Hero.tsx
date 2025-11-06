@@ -1,10 +1,8 @@
 import React from 'react';
-import InteractiveBackground from './InteractiveBackground';
 
 const Hero: React.FC = () => {
   return (
-    <section id="hero" className="relative h-full flex items-center justify-center text-center animate-slide-in-up -m-4 md:-m-6">
-      <InteractiveBackground />
+    <section id="hero" className="relative h-full flex items-center justify-center text-center animate-slide-in-up">
       <div className="relative z-10 max-w-4xl px-4 md:px-6">
         <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black mb-4 bg-clip-text text-transparent bg-gradient-to-r from-text-primary to-text-secondary">
           Abhijit Hanumeswara Kulkarni
@@ -17,7 +15,7 @@ const Hero: React.FC = () => {
         </p>
         <a 
           href="../assets/files/resume.pdf"
-          download="Abhijit_Hanumeswara_Kulkarni_Resume"
+          download
           className="group inline-flex items-center justify-center gap-3 bg-accent text-primary font-bold py-3 px-8 rounded-lg text-lg hover:bg-opacity-80 transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-accent/40"
         >
           <span>Download Resume</span>
