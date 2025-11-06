@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YV5TJV64RM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-YV5TJV64RM');
+</script>
+    <style>
+      :root {
+        --color-primary: 60 11% 96%;      /* #F4F4F2 */
+        --color-secondary: 0 0% 91%;     /* #E8E8E8 */
+        --color-accent: 154 13% 48%;       /* #6B8A7A */
+        --color-text-primary: 210 22% 23%;  /* #2D3748 */
+        --color-text-secondary: 210 14% 52%;/* #718096 */
+      }
+      .dark {
+        --color-primary: 210 22% 11%;      /* #1A202C */
+        --color-secondary: 210 22% 23%;     /* #2D3748 */
+        --color-accent: 154 25% 65%;      /* #82a89a */
+        --color-text-primary: 210 40% 96%;   /* #E2E8F0 */
+        --color-text-secondary: 210 20% 65%; /* #94A3B8 */
+      }
+      body {
+        background-color: hsl(var(--color-primary));
+        color: hsl(var(--color-text-primary));
+      }
+      /* Robot Animations */
+      .robot-brain {
+        transition: fill 0.5s ease-in-out;
+      }
+      .thinking .robot-brain {
+        animation: robot-head-glow 1.5s infinite ease-in-out;
+      }
+
+      /* -- New Expressive Eye Animations -- */
+      .robot-eyes-group .eyelid {
+        transform-origin: top;
+        transform: scaleY(0); /* Eyelids open by default */
+        transition: transform 0.2s ease-in-out;
+      }
+      .robot-eyes-group.sleeping .eyelid {
+        transform: scaleY(1); /* Close eyelids when sleeping */
+      }
+      .robot-eyes-group.awake .eyelid {
+        animation: natural-blink 4s infinite ease-in-out;
+      }
+      .robot-eyes-group.awake .pupil {
+        animation: look-around 8s infinite ease-in-out;
+      }
+      .thinking .robot-eyes-group.awake .pupil {
+        animation: look-around 8s infinite ease-in-out, pupil-dilate 1.5s infinite ease-in-out alternate;
+      }
+      @keyframes natural-blink {
+        0%, 95%, 100% { transform: scaleY(0); } /* Open */
+        97%, 98% { transform: scaleY(1); }    /* Briefly closed */
+      }
+      @keyframes look-around {
+        0%, 100% { transform: translate(0, 0); }
+        15% { transform: translate(-2px, 1px); }
+        30% { transform: translate(1px, -1px); }
+        45% { transform: translate(2px, 1px); }
+        60% { transform: translate(-1px, -1px); }
+        80% { transform: translate(0, 1px); }
+      }
+      @keyframes pupil-dilate {
+        from { r: 2.5; }
+        to { r: 3.5; }
+      }
+      /* -- End Eye Animations -- */
+
+      /* -- Drowsy State Animations -- */
+      .robot-eyes-group.drowsy .eyelid {
+        animation: heavy-blink 2.5s infinite ease-in-out;
+      }
+      .robot-mouth .yawn {
+        animation: yawn-anim 2.5s infinite ease-in-out;
+        transform-origin: 100px 80px; /* Set origin to top-center of mouth */
+      }
+      .sleepy-dust {
+        opacity: 0;
+        animation: sleepy-dust-fall 3s infinite linear;
+      }
+      .sleepy-dust.dust-2 { animation-delay: 1s; }
+      .sleepy-dust.dust-3 { animation-delay: 2s; }
+      .sleepy-dust.dust-4 { animation-delay: 0.5s; }
+      .sleepy-dust.dust-5 { animation-delay: 1.5s; }
+      
+      @keyframes heavy-blink {
+        0%, 40%, 100% { transform: scaleY(0); } /* Open for a bit */
+        50%, 90% { transform: scaleY(1); }     /* Closed for longer */
+      }
+      @keyframes yawn-anim {
+        0%, 100% { transform: scaleY(0.2); opacity: 0.5; }
+        20% { transform: scaleY(1); opacity: 1; }
+        60% { transform: scaleY(1); opacity: 1; }
+        80% { transform: scaleY(0.2); opacity: 0.5; }
+      }
+      @keyframes sleepy-dust-fall {
+        0% { transform: translateY(0px) translateX(0px); opacity: 1; }
+        100% { transform: translateY(40px) translateX(5px); opacity: 0; }
+      }
+      /* -- End Drowsy Animations -- */
+
+      .robot-z-group {
+        transform-origin: center;
+        animation: z-group-bob 2.1s infinite ease-in-out;
+      }
+      .z {
+        fill: hsl(var(--color-text-secondary));
+        font-size: 10px;
+        font-family: Inter, sans-serif;
+        font-weight: bold;
+      }
+      .z-2, .z-3 {
+        opacity: 0;
+      }
+      .z-2 {
+        animation: z-fade-in-step-2 2.1s infinite step-end;
+      }
+      .z-3 {
+        animation: z-fade-in-step-3 2.1s infinite step-end;
+      }
+      @keyframes z-group-bob {
+        0%, 100% { transform: translateY(0px) rotate(0deg); }
+        50% { transform: translateY(-2px) rotate(2deg); }
+      }
+      @keyframes z-fade-in-step-2 {
+        0%, 32% { opacity: 0; }
+        33%, 100% { opacity: 1; }
+      }
+      @keyframes z-fade-in-step-3 {
+        0%, 65% { opacity: 0; }
+        66%, 100% { opacity: 1; }
+      }
+
+      /* New Loader Styles */
+      .loader-container {
+        position: relative;
+        width: 150px;
+        height: 150px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .loader-orb {
+        width: 50px;
+        height: 50px;
+        background-color: hsl(var(--color-accent));
+        border-radius: 50%;
+        box-shadow: 0 0 20px hsl(var(--color-accent)), 0 0 40px hsl(var(--color-accent));
+        animation: orb-pulse 2s infinite ease-in-out;
+      }
+      .loader-particle {
+        position: absolute;
+        width: 6px;
+        height: 6px;
+        background-color: hsl(var(--color-text-secondary));
+        border-radius: 50%;
+        transform-origin: 75px 75px; /* center of the 150x150 container */
+      }
+      .particle-1 { animation: orbit-1 4s linear infinite; }
+      .particle-2 { animation: orbit-2 5s linear infinite; width: 4px; height: 4px; }
+      .particle-3 { animation: orbit-3 6s linear infinite; }
+      .particle-4 { animation: orbit-4 7s linear infinite; width: 3px; height: 3px; }
+
+      @keyframes orb-pulse {
+        0%, 100% { transform: scale(0.95); box-shadow: 0 0 20px hsl(var(--color-accent)), 0 0 40px hsl(var(--color-accent)); }
+        50% { transform: scale(1.05); box-shadow: 0 0 30px hsl(var(--color-accent)), 0 0 60px hsl(var(--color-accent)); }
+      }
+      @keyframes orbit-1 {
+        from { transform: rotate(0deg) translateX(50px) rotate(0deg); }
+        to   { transform: rotate(360deg) translateX(50px) rotate(-360deg); }
+      }
+      @keyframes orbit-2 {
+        from { transform: rotate(0deg) translateX(65px) rotate(0deg); }
+        to   { transform: rotate(360deg) translateX(65px) rotate(-360deg); }
+      }
+      @keyframes orbit-3 {
+        from { transform: rotate(0deg) translateX(40px) rotate(0deg); }
+        to   { transform: rotate(-360deg) translateX(40px) rotate(360deg); }
+      }
+      @keyframes orbit-4 {
+        from { transform: rotate(0deg) translateX(58px) rotate(0deg); }
+        to   { transform: rotate(-360deg) translateX(58px) rotate(360deg); }
+      }
+
+
+      /* Global Scrollbar Styles */
+      /* For Webkit browsers (Chrome, Safari, Edge) */
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background-color: hsl(var(--color-secondary));
+      }
+      ::-webkit-scrollbar-thumb {
+        background-color: hsl(var(--color-accent) / 0.7);
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background-color: hsl(var(--color-accent));
+      }
+      
+      /* For Firefox */
+      * {
+        scrollbar-width: thin;
+        scrollbar-color: hsl(var(--color-accent) / 0.7) hsl(var(--color-secondary));
+      }
+
+      /* Horizontal Timeline Styles */
+      .timeline-wrapper {
+        position: relative;
+        width: 100%;
+        padding: 20px 0;
+      }
+      .timeline-line {
+        position: absolute;
+        top: 40px; /* Adjusted for larger logo */
+        left: 10%;
+        width: 80%;
+        height: 2px;
+        background-color: hsl(var(--color-secondary));
+      }
+      .timeline-entries {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+      }
+      .timeline-entry {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        cursor: pointer;
+        text-align: center;
+        width: 120px; /* Give entries a fixed width */
+      }
+      .timeline-logo {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: #fff;
+        border: 2px solid hsl(var(--color-text-secondary));
+        transition: all 0.3s ease;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      }
+      .timeline-logo img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        border-radius: 100px;
+      }
+      .timeline-entry:hover .timeline-logo,
+      .timeline-logo.active {
+        border-color: hsl(var(--color-accent));
+        transform: scale(1.15);
+        box-shadow: 0 4px 12px hsl(var(--color-accent) / 0.4);
+      }
+      .timeline-label {
+        margin-top: 12px; /* Adjusted margin */
+      }
+      .timeline-label .company {
+        font-weight: 500;
+        font-size: 0.875rem;
+        color: hsl(var(--color-text-secondary));
+        transition: color 0.3s ease;
+        line-height: 1.2;
+      }
+      .timeline-entry:hover .timeline-label .company,
+      .timeline-label .company.active {
+        color: hsl(var(--color-accent));
+      }
+      .timeline-label .duration {
+        font-size: 0.75rem;
+        color: hsl(var(--color-text-secondary));
+        margin-top: 4px;
+        white-space: nowrap;
+      }
+    </style>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              'primary': 'hsl(var(--color-primary))',
+              'secondary': 'hsl(var(--color-secondary))',
+              'accent': 'hsl(var(--color-accent))',
+              'text-primary': 'hsl(var(--color-text-primary))',
+              'text-secondary': 'hsl(var(--color-text-secondary))',
+            },
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', '"Liberation Mono"', '"Courier New"', 'monospace'],
+            },
+            animation: {
+              'fade-in': 'fadeIn 0.5s ease-in-out forwards',
+              'slide-in-up': 'slideInUp 0.5s ease-in-out forwards',
+              'bounce': 'bounce 1s infinite',
+              'bounce-right': 'bounce-right 1.5s infinite',
+              'pulse-glow': 'pulseGlow 1.5s infinite ease-in-out',
+              'robot-float': 'robot-float 4s ease-in-out infinite',
+              'robot-antenna-pulse': 'robot-antenna-pulse 2s infinite ease-in-out',
+              'cloud-bob': 'cloudBob 2.5s infinite ease-in-out',
+              'content-fade-in': 'contentFadeIn 0.5s ease-in-out forwards',
+              'slide-in-from-left': 'slideInFromLeft 0.5s ease-out forwards',
+              'slide-in-from-right': 'slideInFromRight 0.5s ease-out forwards',
+            },
+            keyframes: {
+              fadeIn: {
+                '0%': { opacity: 0 },
+                '100%': { opacity: 1 },
+              },
+              slideInUp: {
+                '0%': { transform: 'translateY(20px)', opacity: 0 },
+                '100%': { transform: 'translateY(0)', opacity: 1 },
+              },
+              bounce: {
+                '0%, 100%': { transform: 'translateY(-25%)', animationTimingFunction: 'cubic-bezier(0.8, 0, 1, 1)' },
+                '50%': { transform: 'translateY(0)', animationTimingFunction: 'cubic-bezier(0, 0, 0.2, 1)' },
+              },
+              'bounce-right': {
+                '0%, 100%': {
+                  transform: 'translateX(0)',
+                  animationTimingFunction: 'cubic-bezier(0.8, 0, 1, 1)',
+                },
+                '50%': {
+                  transform: 'translateX(10px)',
+                  animationTimingFunction: 'cubic-bezier(0, 0, 0.2, 1)',
+                },
+              },
+              pulseGlow: {
+                '0%, 100%': { transform: 'scale(1)', opacity: 0.5 },
+                '50%': { transform: 'scale(1.2)', opacity: 1 },
+              },
+              'robot-float': {
+                '0%, 100%': { transform: 'translateY(0)' },
+                '50%': { transform: 'translateY(-10px)' },
+              },
+              'robot-head-glow': {
+                '0%, 100%': { fill: 'hsl(var(--color-accent))', filter: 'none' },
+                '50%': { fill: 'hsl(var(--color-accent))', filter: 'url(#glow)' },
+              },
+              'robot-antenna-pulse': {
+                '0%, 100%': { r: '4' },
+                '50%': { r: '6' },
+              },
+              cloudBob: {
+                  '0%, 100%': { transform: 'translateY(0)' },
+                  '50%': { transform: 'translateY(-3px)' },
+              },
+              contentFadeIn: {
+                '0%': { opacity: 0, transform: 'translateY(10px)' },
+                '100%': { opacity: 1, transform: 'translateY(0px)' },
+              },
+              slideInFromLeft: {
+                '0%': { opacity: 0, transform: 'translateX(-30px)' },
+                '100%': { opacity: 1, transform: 'translateX(0px)' },
+              },
+              slideInFromRight: {
+                '0%': { opacity: 0, transform: 'translateX(30px)' },
+                '100%': { opacity: 1, transform: 'translateX(0px)' },
+              },
+            },
+            perspective: {
+              '1000': '1000px',
+              '1200': '1200px',
+            },
+            transformStyle: {
+              'preserve-3d': 'preserve-3d',
+            },
+          }
+        }
+      }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="/index.css">
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://aistudiocdn.com/react@^19.1.1",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.1.1/",
+    "react/": "https://aistudiocdn.com/react@^19.1.1/",
+    "@google/genai": "https://aistudiocdn.com/@google/genai/dist/index.js"
+  }
+}
+</script>
+  <script type="module" crossorigin src="/assets/index-DFgJ52bz.js"></script>
+</head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
