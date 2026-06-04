@@ -58,8 +58,8 @@ const About: React.FC = () => {
               </p>
               <p>
                 With experience at <span className="font-mono text-g-gold text-sm">Morgan Stanley</span> and{' '}
-                <span className="font-mono text-g-gold text-sm">Juspay</span>, I've built real-time dashboards,
-                micro-frontend architectures, and notification platforms at scale.
+                <span className="font-mono text-g-gold text-sm">SnapRefund</span>, I've built real-time dashboards,
+                micro-frontend architectures, IAM systems, and notification platforms at scale.
               </p>
               <p>I thrive at the intersection of clean UI and solid backend design.</p>
             </div>

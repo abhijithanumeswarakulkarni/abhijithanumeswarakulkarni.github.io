@@ -3,12 +3,25 @@ import { useInView } from './hooks/useInView';
 
 const quests = [
   {
+    role:       'Software Engineer Intern',
+    company:    'SnapRefund Inc.',
+    duration:   'Jun 2025 – Present',
+    location:   'Los Angeles, CA',
+    rarity:     'legendary',
+    label:      'LEGENDARY',
+    logoUrl:    'https://img.logo.dev/snaprefund.io?token=pk_XFuxQT5RQj6fYiG8k5sbBQ',
+    points: [
+      'Crafted a role-based IAM system with PostgreSQL, NestJS, Vue.js, and Nuxt — cutting user onboarding time by 80%.',
+      'Managed environment variables and email templates with AWS Session Manager and AWS Console.',
+    ],
+  },
+  {
     role:       'Senior Software Engineer',
     company:    'Accolite Digital · Morgan Stanley',
     duration:   'Jul 2021 – Jun 2024',
     location:   'Bangalore, India',
-    rarity:     'legendary',
-    label:      'LEGENDARY',
+    rarity:     'epic',
+    label:      'EPIC',
     logoUrl:    'https://img.logo.dev/morganstanley.com?token=pk_XFuxQT5RQj6fYiG8k5sbBQ',
     points: [
       'Designed a real-time revenue dashboard in Spring Boot, React, and Highcharts — contributing to a 70% revenue increase.',
@@ -23,8 +36,8 @@ const quests = [
     company:    'Accolite Digital · Morgan Stanley',
     duration:   'Jul 2020 – Jun 2021',
     location:   'Bangalore, India',
-    rarity:     'epic',
-    label:      'EPIC',
+    rarity:     'rare',
+    label:      'RARE',
     logoUrl:    'https://img.logo.dev/morganstanley.com?token=pk_XFuxQT5RQj6fYiG8k5sbBQ',
     points: [
       'Championed micro-service and micro-frontend adoption via Spring Boot, React, and Webpack Module Federation.',
@@ -36,8 +49,8 @@ const quests = [
     company:    'Accolite Digital · Juspay Technologies',
     duration:   'Jan 2020 – Jun 2020',
     location:   'Bangalore, India',
-    rarity:     'rare',
-    label:      'RARE',
+    rarity:     'uncommon',
+    label:      'UNCOMMON',
     logoUrl:    'https://img.logo.dev/juspay.io?token=pk_XFuxQT5RQj6fYiG8k5sbBQ',
     points: [
       'Handled Single Sign-On for a payments dashboard — wiring up OIDC with JWT auth in VanillaJS and Node.js.',
