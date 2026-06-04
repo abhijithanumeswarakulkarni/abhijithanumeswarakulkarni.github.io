@@ -1,5 +1,5 @@
 
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect } from 'react';
 
 // A simple Vector class for 2D math
 class Vector {
@@ -259,34 +259,7 @@ class Boid {
 
 const InteractiveBackground: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [accentColor, setAccentColor] = useState('hsl(154, 13%, 48%)');
-
-  // Effect to update color based on theme
-  useEffect(() => {
-    const updateColor = () => {
-      // Read the CSS variable from the root element
-      const color = getComputedStyle(document.documentElement)
-        .getPropertyValue('--color-accent')
-        .trim();
-      // The value is in HSL components, so we build the hsl string
-      setAccentColor(`hsl(${color})`);
-    };
-
-    updateColor(); // Initial color set
-
-    // Observe changes to the class attribute of the <html> element
-    const observer = new MutationObserver((mutationsList) => {
-      for (const mutation of mutationsList) {
-        if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
-          updateColor();
-        }
-      }
-    });
-
-    observer.observe(document.documentElement, { attributes: true });
-
-    return () => observer.disconnect();
-  }, []);
+  const accentColor = 'rgba(232, 162, 20, 0.7)';
 
   // Effect to manage canvas animation
   useEffect(() => {

@@ -1,64 +1,65 @@
 import React from 'react';
+import { useInView } from './hooks/useInView';
 
-const contactDetails = [
-  {
-    icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-      </svg>
-    ),
-    label: 'Email',
-    value: 'hanumesw@usc.edu',
-    href: 'mailto:hanumesw@usc.edu',
-  },
-  {
-    icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-      </svg>
-    ),
-    label: 'Phone',
-    value: '+1 (213) 275-7030',
-    href: 'tel:+12132757030',
-  },
-  {
-    icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="currentColor" viewBox="0 0 24 24">
-        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-      </svg>
-    ),
-    label: 'LinkedIn',
-    value: 'Connect with me',
-    href: 'https://www.linkedin.com/in/abhijit-h-kulkarni/',
-  },
+const channels = [
+  { label: 'EMAIL',    value: 'hanumesw@usc.edu',          href: 'mailto:hanumesw@usc.edu',                            external: false },
+  { label: 'PHONE',    value: '+1 (213) 275-7030',          href: 'tel:+12132757030',                                   external: false },
+  { label: 'LINKEDIN', value: '/in/abhijit-h-kulkarni',     href: 'https://www.linkedin.com/in/abhijit-h-kulkarni/',    external: true  },
+  { label: 'GITHUB',   value: 'abhijithanumeswarakulkarni', href: 'https://github.com/abhijithanumeswarakulkarni',       external: true  },
 ];
 
 const Contact: React.FC = () => {
+  const { ref, inView } = useInView();
+
   return (
-    <section id="contact" className="text-center animate-slide-in-up" style={{ animationDelay: '400ms' }}>
-      <h2 className="text-3xl sm:text-4xl font-bold mb-4">Get In Touch</h2>
-      <p className="text-text-secondary text-base sm:text-lg max-w-2xl mx-auto mb-12">
-        I'm currently open to new opportunities and collaborations. Feel free to reach out via email, phone, or connect with me on LinkedIn. I'll get back to you as soon as possible!
-      </p>
-      
-      <div className="flex flex-col sm:flex-row justify-center items-center gap-8 sm:gap-12 md:gap-16">
-        {contactDetails.map((item) => (
-          <a
-            key={item.label}
-            href={item.href}
-            target={item.label === 'LinkedIn' ? '_blank' : undefined}
-            rel={item.label === 'LinkedIn' ? 'noopener noreferrer' : undefined}
-            className="group flex flex-col items-center gap-4 text-text-primary hover:text-accent transition-colors duration-300"
-          >
-            <div className="bg-secondary p-5 rounded-full transition-all duration-300 transform group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-accent/30 border border-transparent group-hover:border-accent/50">
-              {item.icon}
+    <section
+      id="contact"
+      ref={ref as React.RefObject<HTMLElement>}
+      className={`py-28 px-6 transition-all duration-700 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+      style={{ background: 'linear-gradient(180deg, rgb(8,12,20) 0%, rgb(11,17,28) 50%, rgb(8,12,20) 100%)' }}
+    >
+      <div className="max-w-3xl mx-auto">
+        <p className="slabel mb-2">// Comms</p>
+        <h2 className="font-cinzel text-3xl sm:text-4xl font-bold text-g-text tracking-wide mb-4">Guild Hall</h2>
+        <p className="text-g-muted font-raj text-lg mb-12 max-w-lg">
+          Open to new quests and collaborations. Send a transmission and I'll respond swiftly.
+        </p>
+
+        <div className="gf4 overflow-hidden">
+          {/* Panel header */}
+          <div className="flex items-center justify-between px-5 py-3 border-b border-g-gold/15 bg-g-panel2/30">
+            <span className="slabel">Transmission Channels</span>
+            <div className="flex gap-1.5">
+              <div className="w-2 h-2 rounded-full bg-g-red/50" />
+              <div className="w-2 h-2 rounded-full bg-g-gold/50" />
+              <div className="w-2 h-2 rounded-full bg-g-green/50" />
             </div>
-            <div className="text-center">
-              <p className="font-bold text-lg">{item.label}</p>
-              <p className="text-text-secondary group-hover:text-accent transition-colors duration-300">{item.value}</p>
-            </div>
-          </a>
-        ))}
+          </div>
+
+          {/* Channels */}
+          <div className="divide-y divide-g-border/30">
+            {channels.map(({ label, value, href, external }) => (
+              <a
+                key={label}
+                href={href}
+                target={external ? '_blank' : undefined}
+                rel={external ? 'noopener noreferrer' : undefined}
+                className="flex items-center gap-5 px-5 py-4 group hover:bg-g-gold/5 transition-colors duration-200"
+              >
+                <span className="font-mono text-xs text-g-gold/60 tracking-widest w-20 flex-shrink-0">{label}</span>
+                <span className="font-mono text-xs text-g-border/70">——</span>
+                <span className="font-raj text-g-muted group-hover:text-g-text transition-colors duration-200 flex-1 min-w-0 truncate">
+                  {value}
+                </span>
+                {external && (
+                  <span className="font-mono text-xs text-g-muted/35 group-hover:text-g-gold/50 transition-colors flex-shrink-0">
+                    ↗
+                  </span>
+                )}
+              </a>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );

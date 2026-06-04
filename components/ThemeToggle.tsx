@@ -1,42 +1,73 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { THEMES, SEASON_ORDER, type Season } from './themes';
 
-const ThemeToggle: React.FC = () => {
-  const [isDarkMode, setIsDarkMode] = useState(true);
+interface Props {
+  current: Season;
+  onChange: (s: Season) => void;
+}
 
-  useEffect(() => {
-    const storedTheme = localStorage.getItem('theme');
-    if (storedTheme) {
-      setIsDarkMode(storedTheme === 'dark');
-    } else {
-      // Default to dark mode if no theme is stored
-      setIsDarkMode(true);
-    }
-  }, []);
+const PANEL = 'rgba(10,13,18,0.96)';   // near-opaque dark, reads on any season bg
 
-  useEffect(() => {
-    if (isDarkMode) {
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
-    }
-  }, [isDarkMode]);
+const ThemeToggle: React.FC<Props> = ({ current, onChange }) => {
+  const [open, setOpen] = useState(false);
+  const cur = THEMES[current];
 
-  const toggleTheme = () => setIsDarkMode(prev => !prev);
-  
   return (
-    <button
-      onClick={toggleTheme}
-      className="bg-secondary p-2 rounded-full text-text-primary hover:bg-accent/20 transition-all duration-300 transform hover:scale-110"
-      aria-label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
-    >
-      {isDarkMode ? (
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
-      ) : (
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
+    <div className="fixed top-4 right-4 z-40 flex flex-col items-end gap-2 select-none">
+      {/* Toggle button */}
+      <button
+        onClick={() => setOpen(o => !o)}
+        className="flex items-center gap-2.5 px-3.5 py-2.5"
+        style={{
+          background: PANEL,
+          border: `2px solid ${cur.accent}`,
+          color: '#fff',
+          boxShadow: `0 2px 10px rgba(0,0,0,0.5), 0 0 14px ${cur.accent}33`,
+        }}
+      >
+        <span style={{ fontSize: 17, lineHeight: 1 }}>{cur.icon}</span>
+        <span className="font-cinzel text-xs font-bold tracking-widest" style={{ color: '#fff' }}>
+          {cur.season}
+        </span>
+        <span className="font-mono text-[10px]" style={{ color: cur.accent }}>{open ? '▲' : '▼'}</span>
+      </button>
+
+      {/* Season options */}
+      {open && (
+        <div className="flex flex-col gap-1.5" style={{ animation: 'fade-up 0.18s ease both' }}>
+          {SEASON_ORDER.map(s => {
+            const t = THEMES[s];
+            const active = s === current;
+            return (
+              <button
+                key={s}
+                onClick={() => { setOpen(false); if (!active) onChange(s); }}
+                className="flex items-center gap-3 px-3.5 py-2.5"
+                style={{
+                  minWidth: 190,
+                  background: PANEL,
+                  border: `2px solid ${active ? t.accent : 'rgba(255,255,255,0.14)'}`,
+                  boxShadow: '0 2px 10px rgba(0,0,0,0.5)',
+                }}
+                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = t.accent; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = active ? t.accent : 'rgba(255,255,255,0.14)'; }}
+              >
+                {/* Accent swatch + icon */}
+                <span className="flex items-center justify-center"
+                  style={{ width: 26, height: 26, background: `${t.accent}22`, border: `1.5px solid ${t.accent}`, fontSize: 15 }}>
+                  {t.icon}
+                </span>
+                <div className="flex flex-col items-start leading-tight">
+                  <span className="font-cinzel text-xs font-bold tracking-wider" style={{ color: '#fff' }}>{t.season}</span>
+                  <span className="font-mono text-[9px]" style={{ color: t.accent }}>{t.world}</span>
+                </div>
+                {active && <span className="ml-auto font-mono text-[10px]" style={{ color: t.accent }}>● ACTIVE</span>}
+              </button>
+            );
+          })}
+        </div>
       )}
-    </button>
+    </div>
   );
 };
 

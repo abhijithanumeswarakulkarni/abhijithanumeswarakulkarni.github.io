@@ -8,4 +8,6 @@ export interface Project {
   imageUrl: string;
   liveUrl?: string;
   githubUrl?: string;
+  rarity?: 'legendary' | 'epic' | 'rare' | 'uncommon' | 'common';
+  rarityLabel?: string;
 }

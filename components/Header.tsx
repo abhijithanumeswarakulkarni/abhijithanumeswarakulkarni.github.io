@@ -1,157 +1,123 @@
 import React, { useState, useEffect } from 'react';
-import ThemeToggle from './ThemeToggle';
 
-interface HeaderProps {
-  isAIMode: boolean;
-  setIsAIMode: (value: boolean) => void;
-  navigateTo: (index: number) => void;
-  activeIndex: number;
-  sections: { id: string, name: string }[];
-}
+const navItems = [
+  { label: 'About',      href: '#about' },
+  { label: 'Education',  href: '#education' },
+  { label: 'Experience', href: '#experience' },
+  { label: 'Projects',   href: '#projects' },
+  { label: 'Skills',     href: '#skills' },
+  { label: 'Contact',    href: '#contact' },
+];
 
-const Header: React.FC<HeaderProps> = ({ isAIMode, setIsAIMode, navigateTo, activeIndex, sections }) => {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  useEffect(() => {
-    setIsScrolled(isAIMode || activeIndex > 0);
-  }, [isAIMode, activeIndex]);
+const Header: React.FC = () => {
+  const [scrolled, setScrolled]   = useState(false);
+  const [menuOpen, setMenuOpen]   = useState(false);
 
   useEffect(() => {
-    if (isMenuOpen && !isAIMode) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [isMenuOpen, isAIMode]);
+    const h = () => setScrolled(window.scrollY > 30);
+    window.addEventListener('scroll', h, { passive: true });
+    return () => window.removeEventListener('scroll', h);
+  }, []);
 
   useEffect(() => {
-    // Close mobile menu if user switches to AI mode
-    if (isAIMode) {
-      setIsMenuOpen(false);
-    }
-  }, [isAIMode]);
+    document.body.style.overflow = menuOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [menuOpen]);
 
-  const navLinks = sections.slice(1).map((sec, i) => ({
-    href: `#${sec.id}`,
-    label: sec.name,
-    index: i + 1,
-  }));
-
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, index: number) => {
+  const go = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
-    navigateTo(index);
-    setIsMenuOpen(false); // Close menu on navigation
+    document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
+    setMenuOpen(false);
   };
-  
-  const handleLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
-    if (!isAIMode) {
-      navigateTo(0);
-    }
-  }
-
-  const SwitchModeButton = (
-    <button
-      onClick={() => setIsAIMode(!isAIMode)}
-      className="bg-accent text-primary font-medium py-2 px-5 rounded-full text-sm hover:bg-opacity-90 transition-all duration-300 transform hover:scale-105 shadow-md flex items-center gap-2"
-      aria-label={isAIMode ? 'Switch to Classic Mode' : 'Switch to AI Mode'}
-    >
-      {isAIMode ? (
-        <>
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
-          <span>Classic</span>
-        </>
-      ) : (
-        <>
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" /></svg>
-          <span>AI Mode</span>
-        </>
-      )}
-    </button>
-  );
 
   return (
     <>
-      <header className={`fixed top-0 z-50 w-full transition-all duration-300 ${isScrolled ? 'bg-primary/80 backdrop-blur-sm shadow-md' : 'bg-transparent'}`}>
-        <div className="container mx-auto flex items-center justify-between p-4 md:p-6">
-          {/* Left Side: Hamburger (mobile) + Logo */}
-          <div className="flex items-center gap-4">
-            {/* Hamburger Button (only in manual mode on mobile) */}
-            {!isAIMode && (
-              <button
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="md:hidden z-50 p-2 -ml-2 text-text-primary focus:outline-none"
-                aria-label="Toggle menu"
-                aria-expanded={isMenuOpen}
-                aria-controls="mobile-menu"
-              >
-                <div className="w-6 h-6 flex flex-col justify-center items-center gap-1.5">
-                  <span className={`block h-0.5 w-full bg-current rounded-full transform transition duration-300 ease-in-out ${isMenuOpen ? 'translate-y-2 rotate-45' : ''}`}></span>
-                  <span className={`block h-0.5 w-full bg-current rounded-full transition-opacity duration-300 ease-in-out ${isMenuOpen ? 'opacity-0' : ''}`}></span>
-                  <span className={`block h-0.5 w-full bg-current rounded-full transform transition duration-300 ease-in-out ${isMenuOpen ? '-translate-y-2 -rotate-45' : ''}`}></span>
-                </div>
-              </button>
-            )}
+      <header
+        className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+          scrolled
+            ? 'bg-g-bg/95 backdrop-blur-md border-b border-g-gold/15 shadow-lg shadow-black/40'
+            : 'bg-transparent'
+        }`}
+      >
+        {scrolled && (
+          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-g-gold/40 to-transparent" />
+        )}
 
-            <a 
-              href="#" 
-              onClick={handleLogoClick}
-              className={`text-2xl font-bold text-text-primary hover:text-accent transition-colors ${isAIMode ? 'cursor-default' : 'cursor-pointer'}`}
-            >
-              AK.
-            </a>
-          </div>
-
-          {/* Right Side: Nav + Toggles */}
-          <div className="flex items-center gap-2 sm:gap-4">
-            <nav className={`hidden md:flex items-center transition-all duration-500 ${isAIMode ? 'opacity-0 -translate-x-4 pointer-events-none' : 'opacity-100 translate-x-0'}`}>
-              <div className="flex space-x-8">
-                {navLinks.map((link) => (
-                  <a 
-                    key={link.href} 
-                    href={link.href} 
-                    onClick={(e) => handleNavClick(e, link.index)}
-                    className={`transition-colors duration-300 font-medium cursor-pointer ${
-                      activeIndex === link.index ? 'text-accent' : 'text-text-secondary hover:text-accent'
-                    }`}
-                  >
-                    {link.label}
-                  </a>
-                ))}
-              </div>
-            </nav>
-
-            <div className="flex items-center gap-2 sm:gap-4 md:ml-4">
-              <ThemeToggle />
-              {SwitchModeButton}
+        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between gap-6">
+          {/* Logo */}
+          <a
+            href="#"
+            onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+            className="flex items-center gap-3 group flex-shrink-0"
+          >
+            <div className="w-7 h-7 border border-g-gold/50 rotate-45 flex items-center justify-center transition-all duration-200 group-hover:border-g-gold group-hover:shadow-[0_0_10px_rgba(232,162,20,0.3)]">
+              <div className="w-2.5 h-2.5 bg-g-gold/60 group-hover:bg-g-gold transition-colors duration-200" />
             </div>
+            <div className="leading-none">
+              <span className="font-cinzel text-sm font-bold text-g-text group-hover:text-g-bright transition-colors duration-200 tracking-widest">
+                ABHIJIT.HK
+              </span>
+              <span className="font-mono text-xs text-g-gold/60 ml-2">LVL 25</span>
+            </div>
+          </a>
+
+          {/* Desktop nav */}
+          <nav className="hidden lg:flex items-center gap-8">
+            {navItems.map(({ label, href }) => (
+              <a key={href} href={href} onClick={(e) => go(e, href)} className="nav-link">
+                {label}
+              </a>
+            ))}
+          </nav>
+
+          {/* Right actions */}
+          <div className="flex items-center gap-4 flex-shrink-0">
+            <a href="assets/files/resume.pdf" download className="hidden md:inline-flex gbtn text-xs py-2 px-4">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+              </svg>
+              <span>Resume</span>
+            </a>
+
+            {/* Hamburger */}
+            <button
+              className="lg:hidden p-1.5 flex flex-col gap-[5px]"
+              onClick={() => setMenuOpen(!menuOpen)}
+              aria-label="Toggle menu"
+            >
+              <span className={`block w-6 h-0.5 bg-g-gold transition-all duration-300 ${menuOpen ? 'rotate-45 translate-y-[7px]' : ''}`} />
+              <span className={`block w-6 h-0.5 bg-g-gold transition-opacity duration-300 ${menuOpen ? 'opacity-0' : ''}`} />
+              <span className={`block w-6 h-0.5 bg-g-gold transition-all duration-300 ${menuOpen ? '-rotate-45 -translate-y-[7px]' : ''}`} />
+            </button>
           </div>
         </div>
       </header>
 
-      {/* Mobile Menu Overlay */}
+      {/* Mobile overlay */}
       <div
-        id="mobile-menu"
-        className={`md:hidden fixed inset-0 bg-primary/95 backdrop-blur-lg z-40 transform transition-transform duration-300 ease-in-out ${isMenuOpen && !isAIMode ? 'translate-x-0' : 'translate-x-full'}`}
+        className={`lg:hidden fixed inset-0 z-40 bg-g-bg/97 flex flex-col items-center justify-center transition-all duration-300 ${
+          menuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+        }`}
       >
-        <nav className="flex flex-col items-center justify-center h-full space-y-8">
-          {navLinks.map((link) => (
-            <a 
-              key={link.href} 
-              href={link.href} 
-              onClick={(e) => handleNavClick(e, link.index)}
-              className={`text-3xl font-bold transition-colors duration-300 ${
-                activeIndex === link.index ? 'text-accent' : 'text-text-primary hover:text-accent'
-              }`}
-            >
-              {link.label}
+        <div className="absolute top-0 left-0 right-0 h-px bg-g-gold/25" />
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-g-gold/25" />
+
+        <p className="font-mono text-xs text-g-gold/40 tracking-[0.35em] mb-8 uppercase">Navigation</p>
+
+        <div className="w-full max-w-xs px-8">
+          {navItems.map(({ label, href }) => (
+            <a key={href} href={href} onClick={(e) => go(e, href)} className="m-nav">
+              {label}
             </a>
           ))}
-        </nav>
+        </div>
+
+        <a href="assets/files/resume.pdf" download className="gbtn mt-10">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+          </svg>
+          <span>Download Resume</span>
+        </a>
       </div>
     </>
   );
