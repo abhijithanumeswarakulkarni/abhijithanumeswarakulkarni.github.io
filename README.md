@@ -1,20 +1,22 @@
 <div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
 </div>
 
-# Run and deploy your AI Studio app
+# Portfolio Grand Prix
 
-This contains everything you need to run your app locally.
+An interactive personal portfolio built as a playable **isometric driving game**, powered by a hand-written **HTML5 Canvas** engine — no game framework, just raw canvas rendering, drift physics, and a lot of trial and error.
 
-View your app in AI Studio: https://ai.studio/apps/drive/1SdVayo9zcDjqt75QSxvhwiH9cgWHp7sT
+<div align="center">
+<img width="100%" alt="Portfolio Grand Prix loading screen" src="./assets/screenshot.png" />
+</div>
 
-## Run Locally
+## Features
 
-**Prerequisites:**  Node.js
+- Drift physics for the driving mechanics
+- Destructible voxel buildings you can crash through
+- Month-based seasonal themes that change the world's look
+- Built with **React** and **TypeScript**
+- Deployed on **GitHub Pages**
 
+## Live Demo
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+[Try it here](https://abhijithanumeswarakulkarni.github.io/)
