@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Abhijit HK — Portfolio</title>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-YV5TJV64RM"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-YV5TJV64RM');
+  </script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            cinzel: ['Cinzel', 'serif'],
+            raj:    ['Rajdhani', 'sans-serif'],
+            mono:   ['Share Tech Mono', 'monospace'],
+          },
+          colors: {
+            'g-bg':     'rgb(var(--g-bg)     / <alpha-value>)',
+            'g-panel':  'rgb(var(--g-panel)  / <alpha-value>)',
+            'g-panel2': 'rgb(var(--g-panel2) / <alpha-value>)',
+            'g-border': 'rgb(var(--g-border) / <alpha-value>)',
+            'g-gold':   'rgb(var(--g-gold)   / <alpha-value>)',
+            'g-bright': 'rgb(var(--g-bright) / <alpha-value>)',
+            'g-blue':   'rgb(var(--g-blue)   / <alpha-value>)',
+            'g-purple': 'rgb(var(--g-purple) / <alpha-value>)',
+            'g-green':  'rgb(var(--g-green)  / <alpha-value>)',
+            'g-red':    'rgb(var(--g-red)    / <alpha-value>)',
+            'g-text':   'rgb(var(--g-text)   / <alpha-value>)',
+            'g-muted':  'rgb(var(--g-muted)  / <alpha-value>)',
+          },
+          animation: {
+            'slide-up': 'slideUp 0.5s ease-out forwards',
+            'fade-in':  'fadeIn 0.5s ease-out forwards',
+          },
+          keyframes: {
+            slideUp: {
+              '0%':   { opacity: '0', transform: 'translateY(20px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+            fadeIn: {
+              '0%':   { opacity: '0' },
+              '100%': { opacity: '1' },
+            },
+          },
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      /* White / silver accent on a neutral dark slate base.
+         The former blue/purple/green/red tokens are now grey shades
+         so the whole site stays within one (white) family. */
+      --g-bg:     12 15 20;
+      --g-panel:  20 25 33;
+      --g-panel2: 32 39 50;
+      --g-border: 60 70 85;
+      --g-gold:   255 255 255;   /* accent (white) */
+      --g-bright: 235 240 248;
+      --g-blue:   226 232 240;   /* light grey */
+      --g-purple: 200 208 220;   /* mid grey   */
+      --g-green:  214 220 230;   /* light grey */
+      --g-red:    150 160 174;   /* slate grey */
+      --g-text:   235 240 248;
+      --g-muted:  150 162 180;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: rgb(var(--g-bg));
+      font-family: 'Rajdhani', sans-serif;
+      color: rgb(var(--g-text));
+      overflow-x: hidden;
+    }
+
+    /* Background grid */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(30,48,85,0.18) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(30,48,85,0.18) 1px, transparent 1px);
+      background-size: 50px 50px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    #root { position: relative; z-index: 1; }
+
+    /* ── Game panel with 2-corner brackets ── */
+    .gf {
+      position: relative;
+      background: rgb(var(--g-panel));
+      border: 1px solid rgba(255,255,255,0.18);
+    }
+    .gf::before, .gf::after {
+      content: '';
+      position: absolute;
+      width: 14px;
+      height: 14px;
+    }
+    .gf::before { top:-2px; left:-2px; border-top:2px solid rgb(var(--g-gold)); border-left:2px solid rgb(var(--g-gold)); }
+    .gf::after  { bottom:-2px; right:-2px; border-bottom:2px solid rgb(var(--g-gold)); border-right:2px solid rgb(var(--g-gold)); }
+
+    /* 4-corner variant */
+    .gf4 {
+      position: relative;
+      background: rgb(var(--g-panel));
+      border: 1px solid rgba(255,255,255,0.18);
+    }
+    .gf4::before { content:''; position:absolute; top:-2px; left:-2px; width:18px; height:18px; border-top:2px solid rgb(var(--g-gold)); border-left:2px solid rgb(var(--g-gold)); }
+    .gf4::after  { content:''; position:absolute; bottom:-2px; right:-2px; width:18px; height:18px; border-bottom:2px solid rgb(var(--g-gold)); border-right:2px solid rgb(var(--g-gold)); }
+
+    /* Gold section divider */
+    .gdiv {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+    }
+
+    /* Section label */
+    .slabel {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.68rem;
+      color: rgba(255,255,255,0.65);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+    }
+
+    /* Gold glow text */
+    .tglow {
+      color: rgb(var(--g-bright));
+      text-shadow: 0 0 12px rgba(255,255,255,0.55), 0 0 28px rgba(255,255,255,0.25);
+    }
+
+    /* ── Navigation ── */
+    .nav-link {
+      font-family: 'Cinzel', serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgb(var(--g-muted));
+      transition: color 0.2s, text-shadow 0.2s;
+      position: relative;
+      padding-bottom: 2px;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0; height: 1px;
+      background: rgb(var(--g-gold));
+      transition: width 0.25s ease;
+      box-shadow: 0 0 5px rgba(255,255,255,0.5);
+    }
+    .nav-link:hover { color: rgb(var(--g-bright)); text-shadow: 0 0 8px rgba(255,255,255,0.35); }
+    .nav-link:hover::after { width: 100%; }
+
+    /* ── Game buttons ── */
+    .gbtn {
+      font-family: 'Cinzel', serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.65rem 1.4rem;
+      border: 1px solid rgba(255,255,255,0.7);
+      color: rgb(var(--g-gold));
+      background: transparent;
+      cursor: pointer;
+      transition: color 0.2s, box-shadow 0.2s, background 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      position: relative;
+      overflow: hidden;
+      text-decoration: none;
+    }
+    .gbtn::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: rgb(var(--g-gold));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.22s ease;
+      z-index: 0;
+    }
+    .gbtn > * { position: relative; z-index: 1; }
+    .gbtn span { position: relative; z-index: 1; }
+    .gbtn:hover { color: rgb(var(--g-bg)); box-shadow: 0 0 18px rgba(255,255,255,0.25); }
+    .gbtn:hover::before { transform: scaleX(1); }
+
+    .gbtn-solid {
+      background: rgb(var(--g-gold));
+      color: rgb(var(--g-bg));
+    }
+    .gbtn-solid::before { background: transparent; }
+    .gbtn-solid:hover { color: rgb(var(--g-gold)); background: transparent; }
+
+    .gbtn-dim {
+      border-color: rgba(122,142,168,0.35);
+      color: rgb(var(--g-muted));
+    }
+    .gbtn-dim::before { background: rgba(122,142,168,0.15); }
+    .gbtn-dim:hover { color: rgb(var(--g-text)); }
+
+    /* ── Stat bar ── */
+    .sbar-track {
+      height: 4px;
+      background: rgb(var(--g-panel2));
+      border: 1px solid rgba(30,48,85,0.8);
+      overflow: hidden;
+    }
+    .sbar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, rgb(var(--g-gold)), rgb(var(--g-bright)));
+      box-shadow: 0 0 6px rgba(255,255,255,0.4);
+      transition: width 1.2s ease-out;
+    }
+
+    /* ── Rarity variants ── */
+    .rar-legendary { color: rgb(255,255,255); border-color: rgba(255,255,255,0.5); }
+    .rar-epic      { color: rgb(224,231,240); border-color: rgba(224,231,240,0.42); }
+    .rar-rare      { color: rgb(198,208,222); border-color: rgba(198,208,222,0.42); }
+    .rar-uncommon  { color: rgb(170,182,198); border-color: rgba(170,182,198,0.42); }
+    .rar-common    { color: rgb(var(--g-muted));  border-color: rgba(150,162,180,0.35); }
+
+    /* ── Skill gem ── */
+    .skill-gem {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.45rem 0.85rem;
+      background: rgb(var(--g-panel));
+      border: 1px solid rgb(var(--g-border));
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 0.875rem;
+      color: rgb(var(--g-muted));
+      transition: border-color 0.2s, color 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+    .skill-gem:hover {
+      border-color: rgba(255,255,255,0.45);
+      color: rgb(var(--g-text));
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(255,255,255,0.1);
+    }
+
+    /* ── Typing cursor ── */
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+    .cursor { display:inline-block; width:2px; height:1.1em; background:rgb(var(--g-bright)); vertical-align:middle; margin-left:2px; animation:blink 1s step-end infinite; }
+
+    /* ── Mobile menu items ── */
+    .m-nav {
+      font-family: 'Cinzel', serif;
+      font-size: 1.15rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgb(var(--g-muted));
+      transition: color 0.2s;
+      padding: 0.75rem 0;
+      display: block;
+      width: 100%;
+      text-align: center;
+      border-bottom: 1px solid rgba(30,48,85,0.5);
+    }
+    .m-nav:hover { color: rgb(var(--g-bright)); }
+
+    /* ── Extra keyframes ── */
+    @keyframes blink-soft {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.15; }
+    }
+    @keyframes scale-in-panel {
+      from { opacity: 0; transform: scale(0.96) translateY(8px); }
+      to   { opacity: 1; transform: scale(1)    translateY(0);   }
+    }
+    @keyframes slide-down {
+      from { opacity: 0; transform: translateY(-12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes shimmer-border {
+      0%   { box-shadow: 0 0 0px rgba(255,255,255,0); }
+      40%  { box-shadow: 0 0 20px rgba(255,255,255,0.4), inset 0 0 10px rgba(255,255,255,0.08); }
+      100% { box-shadow: 0 0 6px rgba(255,255,255,0.12); }
+    }
+    @keyframes scanline {
+      0%   { transform: translateY(-100%); }
+      100% { transform: translateY(100vh);  }
+    }
+    @keyframes float-up {
+      0%   { opacity: 0; transform: translateY(0); }
+      20%  { opacity: 1; }
+      80%  { opacity: 0.6; }
+      100% { opacity: 0; transform: translateY(-60px); }
+    }
+    @keyframes spin-slow {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+    @keyframes pulse-ring {
+      0%   { transform: scale(1);   opacity: 0.7; }
+      100% { transform: scale(1.8); opacity: 0;   }
+    }
+    @keyframes letter-reveal {
+      from { clip-path: inset(0 100% 0 0); }
+      to   { clip-path: inset(0 0%   0 0); }
+    }
+    .anim-scale-in-panel { animation: scale-in-panel 0.35s cubic-bezier(0.16,1,0.3,1) forwards; }
+    .anim-blink-soft     { animation: blink-soft 1.4s ease-in-out infinite; }
+    .anim-spin-slow      { animation: spin-slow 8s linear infinite; }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: rgb(var(--g-bg)); }
+    ::-webkit-scrollbar-thumb { background: rgb(var(--g-border)); }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.6); }
+  </style>
+
+
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://aistudiocdn.com/react@^19.1.1",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.1.1/",
+    "react/": "https://aistudiocdn.com/react@^19.1.1/"
+  }
+}
+</script>
+  <script type="module" crossorigin src="/assets/index-DiCg34Pb.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+</body>
+</html>
